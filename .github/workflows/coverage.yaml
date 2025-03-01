@@ -14,7 +14,7 @@ jobs:
       # Checkout del codice
       - uses: actions/checkout@v2
       - name: Build with Maven
-        run: mvn clean install
+        run: mvn clean test
       - name: Run codacy-coverage-reporter
         uses: codacy/codacy-coverage-reporter-action@v1.3.0
         with:
