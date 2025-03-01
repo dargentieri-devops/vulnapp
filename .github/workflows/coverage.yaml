@@ -1,6 +1,7 @@
 name: Codacy Coverage Reporter
 
-on: 
+on:
+  workflow_dispatch: 
   push:
     branches:
       - main
