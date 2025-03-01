@@ -1,0 +1,21 @@
+name: Codacy Coverage Reporter
+
+on: 
+  push:
+    branches:
+      - main
+
+jobs:
+  codacy-coverage-reporter:
+    runs-on: ubuntu-latest
+    name: codacy-coverage-reporter
+    steps:
+      # Checkout del codice
+      - uses: actions/checkout@v2
+      - name: Build with Maven
+        run: mvn clean install
+      - name: Run codacy-coverage-reporter
+        uses: codacy/codacy-coverage-reporter-action@v1.3.0
+        with:
+          api-token: ${{ secrets.CODACY_API_TOKEN }}
+          coverage-reports: target/site/jacoco/jacoco.xml
