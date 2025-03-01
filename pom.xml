@@ -50,18 +50,19 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.7</version> <!-- Usa l'ultima versione disponibile -->
-				<executions>
-					<execution>
-						<goals>
-							<goal>prepare-agent</goal>
-							<goal>report</goal>
-						</goals>
-						<phase>test</phase>
-					</execution>
-				</executions>
+			    <groupId>org.jacoco</groupId>
+			    <artifactId>jacoco-maven-plugin</artifactId>
+			    <version>0.8.7</version> <!-- Usa l'ultima versione disponibile -->
+			    <executions>
+			        <execution>
+			            <goals>
+			                <goal>prepare-agent</goal> <!-- Preparazione dell'agent per raccogliere i dati -->
+			                <goal>test</goal>           <!-- Esecuzione dei test -->
+			                <goal>report</goal>         <!-- Generazione del report di copertura -->
+			            </goals>
+			            <phase>test</phase>             <!-- Assicurati che questo sia nel ciclo di vita 'test' -->
+			        </execution>
+			    </executions>
 			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
