@@ -61,7 +61,7 @@
 				<version>3.0.0-M5</version>
 				<configuration>
 					<argLine>
-						-javaagent:${settings.localRepository}/net/bytebuddy/byte-buddy-agent/1.15.11/byte-buddy-agent-1.15.11.jar
+						-javaagent:${settings.localRepository}/org/jacoco/org.jacoco.agent/0.8.12/org.jacoco.agent-0.8.12-runtime.jar=destfile=target/jacoco.exec
 					</argLine>
 				</configuration>
 			</plugin>
@@ -70,20 +70,42 @@
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.8.12</version>
 				<executions>
+					<!-- Assicura che JaCoCo sia attivo prima dei test -->
 					<execution>
+						<id>prepare-agent</id>
 						<goals>
 							<goal>prepare-agent</goal>
 						</goals>
 					</execution>
+					<!-- Genera il report dopo `verify` -->
 					<execution>
 						<id>report</id>
-						<phase>test</phase>
+						<phase>verify</phase>
 						<goals>
 							<goal>report</goal>
 						</goals>
 					</execution>
+					<!-- Regole per verificare il coverage -->
+					<execution>
+						<id>check</id>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
 				</executions>
 				<configuration>
+					<rules>
+						<rule>
+							<element>BUNDLE</element>
+							<limits>
+								<limit>
+									<counter>COMPLEXITY</counter>
+									<value>COVEREDRATIO</value>
+									<minimum>0.60</minimum>
+								</limit>
+							</limits>
+						</rule>
+					</rules>
 					<excludes>
 						<exclude>it/devops/vulnapp/Main.class</exclude>
 					</excludes>

@@ -17,7 +17,7 @@ jobs:
         run: |
            mvn --version
            chmod +x ./mvnw 
-           ./mvnw clean test
+           ./mvnw clean test verify jacoco:report
       - name: Directory
         run: ls -lrt target/
       - name: Run codacy-coverage-reporter
